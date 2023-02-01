@@ -1,13 +1,35 @@
 const url = "https://swapi.dev/api/people";
 
+interface Person {
+    name: string,
+    height: string,
+    mass: string,
+    hair_color: string,
+    skin_color: string,
+    eye_color: string,
+    birth_year: string,
+    gender: string,
+    homeworld: string,
+    films: string[],
+    species: string[],
+    vehicles: string[],
+    starships: string[],
+    created: string,
+    edited: string,
+    url: string
+}
+
+interface Person2 { [key: string]: string | string[]; }
+
 async function load() {
     const response = await fetch(url);
     const data = await response.json();
-    // console.log(data.results.length);
-    for (const person of data.results) {
-        console.log(`${person.name} has ${person.eye_color} eyes.`);
+
+    let person1: Person;
+    for (person1 of data.results) {
+        console.log(`${person1.name} has ${person1.eye_color} eyes.`);
     }
-    data.results.forEach(person => {
+    data.results.forEach((person: Person2) => {
         console.log(`${person.name} is ${person.height} cm tall.`);
     });
 }
